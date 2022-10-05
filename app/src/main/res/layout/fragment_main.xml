@@ -34,6 +34,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_main_screen"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -42,7 +43,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/popular_news_tv" />
+        app:layout_constraintTop_toBottomOf="@+id/popular_news_tv"
+        tools:listitem="@layout/recycler_item" />
 
     <ProgressBar
         android:id="@+id/progress_bar"
