@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(private val newsRepository: NewsRepository) : ViewModel() {
+class MainViewModel @Inject constructor(private val repository: NewsRepository) : ViewModel() {
 
 
     val newsLiveData: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
@@ -24,7 +24,7 @@ class MainViewModel @Inject constructor(private val newsRepository: NewsReposito
     private fun getNews(countryCode: String) =
         viewModelScope.launch {
             newsLiveData.postValue(Resource.Loading())
-            val response = newsRepository.getNews(countryCode = countryCode, pageNumber = newsPage)
+            val response = repository.getNews(countryCode = countryCode, pageNumber = newsPage)
             if (response.isSuccessful) {
                 response.body().let { res ->
                     newsLiveData.postValue(Resource.Success(res))
