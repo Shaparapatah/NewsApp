@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/recycler_item_iv"
-        android:layout_width="88dp"
-        android:layout_height="84dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
