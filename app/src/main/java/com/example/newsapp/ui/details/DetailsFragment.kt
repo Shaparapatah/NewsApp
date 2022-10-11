@@ -11,8 +11,10 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.example.newsapp.R
 import com.example.newsapp.databinding.FragmentDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -33,9 +35,18 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initButtons()
+
+    }
+
+    private fun initButtons() {
+        binding.back.setOnClickListener {
+            view?.findNavController()?.navigate(
+                R.id.mainFragment
+            )
+        }
 
         val articleArgs = bundleArgs.article
-
         articleArgs.let { article ->
             article.urlToImage.let {
                 Glide.with(this).load(article.urlToImage).into(binding.headerImageView)
@@ -45,16 +56,19 @@ class DetailsFragment : Fragment() {
             binding.articleDetailsTitle.text = article.title
             binding.articleDetailsDescriptionText.text = article.description
 
+
+
+            binding.favoriteIcon.setOnClickListener {
+                viewModel.savedFavoriteArticles(article)
+            }
+
+
             binding.articleDetailsButton.setOnClickListener {
                 try {
-                    Intent()
-                        .setAction(Intent.ACTION_VIEW)
-                        .addCategory(Intent.CATEGORY_BROWSABLE)
-                        .setData(Uri.parse(takeIf { URLUtil.isValidUrl(article.url) }
-                            ?.let {
-                                article.url
-                            } ?: "https//google.com"))
-                        .let {
+                    Intent().setAction(Intent.ACTION_VIEW).addCategory(Intent.CATEGORY_BROWSABLE)
+                        .setData(Uri.parse(takeIf { URLUtil.isValidUrl(article.url) }?.let {
+                            article.url
+                        } ?: "https//google.com")).let {
                             ContextCompat.startActivity(requireContext(), it, null)
                         }
                 } catch (e: Exception) {
@@ -64,10 +78,6 @@ class DetailsFragment : Fragment() {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-            }
-
-            binding.favoriteIcon.setOnClickListener {
-                viewModel.savedFavoriteArticles(article)
             }
         }
     }
