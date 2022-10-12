@@ -5,6 +5,11 @@
     android:layout_height="match_parent"
     tools:context=".ui.favorite.FavoriteFragment">
 
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_saved_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:itemCount="3"
+        tools:listitem="@layout/recycler_item" />
 
 </FrameLayout>

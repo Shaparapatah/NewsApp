@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.newsapp.databinding.ActivityMainBinding
+import com.example.newsapp.ui.main.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
